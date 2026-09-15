@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "lots")
 public class Lot {
@@ -15,6 +17,7 @@ public class Lot {
 
     @ManyToOne
     @JoinColumn(name = "produit_id", nullable = false)
+    @JsonIgnoreProperties("lots")
     private Produit produit;
 
     @ManyToOne
