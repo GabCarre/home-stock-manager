@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 @Entity
 @Table(name = "lots")
@@ -32,6 +32,9 @@ public class Lot {
 
     @Column(name = "date_ajout", insertable = false, updatable = false)
     private LocalDateTime dateAjout;
+    
+    @OneToMany(mappedBy = "lot", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mouvement> mouvements;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -49,4 +52,7 @@ public class Lot {
     public void setQuantite(BigDecimal quantite) { this.quantite = quantite; }
 
     public LocalDateTime getDateAjout() { return dateAjout; }
+    
+    public List<Mouvement> getMouvements() { return mouvements; }
+    public void setMouvements(List<Mouvement> mouvements) { this.mouvements = mouvements; }
 }
