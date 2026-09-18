@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "mouvements")
 public class Mouvement {
@@ -16,6 +18,7 @@ public class Mouvement {
 
     @ManyToOne
     @JoinColumn(name = "lot_id", nullable = false)
+    @JsonIgnoreProperties("mouvements")
     private Lot lot;
 
     @Enumerated(EnumType.STRING)
@@ -27,6 +30,7 @@ public class Mouvement {
 
     @Column(name = "date_mouvement", insertable = false, updatable = false)
     private LocalDateTime dateMouvement;
+    
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
